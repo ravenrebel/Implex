@@ -1,0 +1,42 @@
+﻿@model JacobiMethod
+
+@{
+    ViewBag.Title = @Model.Name;
+    Layout = "_Layout";
+}
+
+<partial name="_MethodDescriptionPartial" />
+
+<div class="mx-4 mb-5 mt-3">
+    <form asp-action="JacobiMethod" method="post">
+        <div class="row">
+            <div class="form-group col-sm">
+                <label for="size">Size:</label>
+                <input class="form-control" type="number" id="size" onchange="generateJacobiSystemInput('matrixA', 'vectorB', 'vectorX')" />
+            </div>
+            <div class="form-group col-sm">
+                <label for="eps">Eps:</label>
+                <input class="form-control" type="text" id="eps" asp-for="Eps" />
+            </div>
+        </div>
+        <div class="row d-flex justify-content-around m-2 text-center">
+            <div class="col-sm">
+                <p>Matrix A</p>
+                <div id="matrixA"></div>
+            </div>
+            <div class="col-sm">
+                <p>Vector B</p>
+                <div id="vectorB"></div>
+            </div>
+            <div class="col-sm">
+                <p>Vector X (initial values)</p>
+                <div id="vectorX"></div>
+            </div>
+        </div>
+        <div class="row">
+            <input type="submit" value="Calculate" class="btn btn-secondary" id="btn"/>
+        </div>
+    </form>
+</div>
+
+<partial name="_ResultPartial" />
