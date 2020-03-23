@@ -10,6 +10,7 @@ namespace Implex.Controllers
     public class MethodsController : Controller
     {
         // GET: Methods/JacobiMethod
+        [HttpGet]
         public IActionResult JacobiMethod()
         {
             return View(new JacobiMethod());
