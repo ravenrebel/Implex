@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UserSecretsId>aspnet-Implex-6CF51243-A952-484D-ADA4-E97D855B69E5</UserSecretsId>
+        <Configurations>Debug;Release;LinuxRelease;LinuxDebug</Configurations>
     </PropertyGroup>
 
 
