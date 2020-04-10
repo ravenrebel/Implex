@@ -31,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Views\Methods\" />
+      <Folder Include="wwwroot\files\" />
     </ItemGroup>
 
 </Project>

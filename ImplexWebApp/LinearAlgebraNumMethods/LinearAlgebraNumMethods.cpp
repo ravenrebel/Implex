@@ -3,10 +3,11 @@
 #include "LinearAlgebraNumMethods.h"
 #include <chrono>
 #include <thread>
+#include<string>
 
 
 namespace LinearAlgebraNumMethods {
-	bool JacobiMethodCPlusPlus::CheckMatrix(double** matrix, int n) {
+	bool JacobiMethodCPlusPlus::checkMatrix(double** matrix, int n) {
 		int check = 0;
 		for (int i = 0; i < n; i++) {
 
@@ -28,7 +29,7 @@ namespace LinearAlgebraNumMethods {
 		else return false;
 	}
 
-	void JacobiMethodCPlusPlus::Jacobi(int n, double** A, double* B, double* X, double eps) {
+	void JacobiMethodCPlusPlus::jacobi(int n, double** A, double* B, double* X, double eps) {
 		double norm, * TempX = new double[n], start, end;
 
 		do {
@@ -66,7 +67,7 @@ namespace LinearAlgebraNumMethods {
 		int n = matrixA->Count;
 		double** A = LinearAlgebraNumMethods::MethodHelper::sharpListToMatrix(matrixA, n);
 
-		if (CheckMatrix(A, n))
+		if (checkMatrix(A, n))
 		{
 			double* x = new double[n];
 			double* b = new double[n];
@@ -77,7 +78,7 @@ namespace LinearAlgebraNumMethods {
 				b[j] = vectorB[j];
 			}
 
-			Jacobi(n, A, b, x, eps);
+			jacobi(n, A, b, x, eps);
 
 			for (int j = 0; j < n; j++)
 			{
@@ -97,5 +98,13 @@ namespace LinearAlgebraNumMethods {
 			return true;
 		}
 		return false;
+	}
+
+	bool JacobiMethodCPlusPlus::Method(int fileId) {
+		int n;
+		string filename = to_string(fileId) + ".txt";
+		double** A = MethodHelper::readMatrix("\\ImplexWebApp\\Implex\\wwwroot\\files\\" + filename, n, n);
+
+		return true;
 	}
 }

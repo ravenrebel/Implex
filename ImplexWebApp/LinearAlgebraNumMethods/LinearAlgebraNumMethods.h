@@ -10,11 +10,12 @@ namespace LinearAlgebraNumMethods {
 	public ref class JacobiMethodCPlusPlus {
 	private:
 		List<double>^ vectorX = gcnew List<double>();
-		bool CheckMatrix(double** matrix, int n);
-		void Jacobi(int n, double** A, double* B, double* X, double eps);
+		bool checkMatrix(double** matrix, int n);
+		void jacobi(int n, double** A, double* B, double* X, double eps);
 
 	public:
 		List<double>^ getVectorX();
 		bool Method(List<List<double>^>^ matrixA, List<double>^ vectorB, List<double>^ initialX, double eps);
+		bool Method(int fileId);
 	};
 }

@@ -2,13 +2,20 @@
 
 @{
     ViewBag.Title = @Model.Name;
-    Layout = "_Layout";
 }
 
 <partial name="_MethodDescriptionPartial" />
 
+<div class="row text-center my-2">
+    <div class="col-sm">
+        <p>You can upload files with data and calculate result.</p>
+    </div>
+    <div class="col-sm">
+        <a type="button" class="btn btn-secondary" asp-controller="Methods" asp-action="FileJacobiMethod">Use Files</a>
+    </div>
+</div>
 <div class="mx-4 mb-5 mt-3">
-    <form asp-action="JacobiMethod" method="post">
+    <form asp-action="FormJacobiMethod" method="post">
         <div class="row">
             <div class="form-group col-sm">
                 <label for="size">Size:</label>
@@ -34,9 +41,7 @@
             </div>
         </div>
         <div class="row">
-            <input type="submit" value="Calculate" class="btn btn-secondary" id="btn"/>
+            <input type="submit" value="Calculate" class="btn btn-secondary" id="btn" />
         </div>
     </form>
 </div>
-
-<partial name="_ResultPartial" />

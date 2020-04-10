@@ -12,6 +12,8 @@ using Implex.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Implex.Models;
+using Microsoft.Extensions.Options;
 
 namespace Implex
 {
@@ -32,6 +34,15 @@ namespace Implex
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            Action<Models.Options> options = (opt =>
+            {
+                opt.FileId = 0;
+
+            });
+            services.Configure(options);
+            services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<Models.Options>>().Value);
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

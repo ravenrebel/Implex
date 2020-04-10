@@ -10,6 +10,7 @@ namespace LinearAlgebraNumMethods {
 	static class MethodHelper {
 	public:
 		static double** sharpListToMatrix(List<List<double>^>^ matrixA, int n);
+		static double** MethodHelper::readMatrix(string filename, int &n, int &m);
 	};
 }
 
