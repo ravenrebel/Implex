@@ -1,15 +1,18 @@
 ﻿@using System.Collections
 @model Method
 
-<div class="row text-center">
-    <div class="col-sm"><h4>Result</h4></div>
-    @{
-        if (Model.Result != null)
-        {
-            foreach (var elem in (IEnumerable) Model.Result)
+
+<div class="jumbotron">
+    <h4>Result</h4>
+    <div class="row text-center">
+        @{
+            if (Model.Result != null)
             {
-                @:<div class="col-sm"><p>@elem</p></div>
+                foreach (var elem in (IEnumerable)Model.Result)
+                {
+                    @:<div class="col-sm"><p>@elem</p></div>
+                }
             }
         }
-    }
+    </div>
 </div>

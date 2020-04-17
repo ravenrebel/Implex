@@ -1,4 +1,7 @@
-﻿
+﻿.logo {
+    background-image: url("../images/background.jpg")
+}
+
 .navbar {
   background: steelblue;
 }
