@@ -39,32 +39,47 @@ namespace Implex.Controllers
             if (jacobiMethod.VectorB != null && jacobiMethod.MatrixA != null && jacobiMethod.VectorX != null)
             {
                 JacobiMethodCPlusPlus jacobiMethodCPlusPlus = new JacobiMethodCPlusPlus();
-                if (jacobiMethodCPlusPlus.Method(jacobiMethod.MatrixA, jacobiMethod.VectorB, jacobiMethod.VectorX, jacobiMethod.Eps))
+                if (jacobiMethodCPlusPlus.method(jacobiMethod.MatrixA, jacobiMethod.VectorB, jacobiMethod.VectorX, jacobiMethod.Eps))
                     jacobiMethod.Result = jacobiMethodCPlusPlus.getVectorX();
             }
             return View(jacobiMethod);
         }
 
         [HttpPost]
-        public async Task<IActionResult> FileJacobiMethod(JacobiMethod jacobiMethod, [FromForm(Name = "matrix")]IFormFile matrix)
+        [Route("result")]
+        public async Task<FileResult> FileJacobiDownload(JacobiMethod jacobiMethod, IFormFileCollection inputFiles)
         {
-            if (matrix != null)
+            uint id = _options.FileId;
+            lock (_options) _options.FileId++;
+
+            List<string> markers = new List<string> { "A", "b", "x"};
+            int i = 0;
+
+            string fileResult = _hostingEnvironment.WebRootPath + "\\output_files\\";
+
+            foreach (var file in inputFiles)
             {
-                int id = _options.FileId;
-                lock(_options) _options.FileId++;
+                if (file != null)
+                {
+                    string files = Path.Combine(_hostingEnvironment.WebRootPath, "input_files");
+                    string filePath = Path.Combine(files, id.ToString() + markers[i] + ".txt");
 
-                string files = Path.Combine(_hostingEnvironment.WebRootPath, "files");
-                string filePath = Path.Combine(files, id.ToString() + ".txt");
+                    await using FileStream stream = System.IO.File.Create(filePath);
+                    await file.CopyToAsync(stream);
+                    stream.Close();
+                }
 
-                await using FileStream stream = System.IO.File.Create(filePath);
-                await matrix.CopyToAsync(stream);
-
-                JacobiMethodCPlusPlus jacobiMethodCPlusPlus = new JacobiMethodCPlusPlus();
-                if (jacobiMethodCPlusPlus.Method(id)) { }
-                   // jacobiMethod.Result = jacobiMethodCPlusPlus.getVectorX();
-                
+                i++;
             }
-            return View(new JacobiMethod());
+
+            JacobiMethodCPlusPlus jacobiMethodCPlusPlus = new JacobiMethodCPlusPlus();
+            if (jacobiMethodCPlusPlus.method(id, jacobiMethod.Eps))
+            {
+                fileResult += id.ToString() + ".txt";
+            }
+            else fileResult += "empty.txt";
+
+            return File(new FileStream(fileResult, FileMode.Open), "text/plain");
         }
     }
 }

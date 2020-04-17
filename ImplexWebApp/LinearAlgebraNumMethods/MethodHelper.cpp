@@ -34,4 +34,46 @@ namespace LinearAlgebraNumMethods {
 		file.close();
 		return A;
 	}
+
+	double* MethodHelper::readVector(string filename, int& n)
+	{
+		ifstream file;
+		file.open(filename);
+		file >> n;
+		double* b = new double [n];
+
+		for (int i = 0; i < n; i++)
+		{
+			file >> b[i];
+		}
+		file.close();
+		return b;
+	}
+
+	void MethodHelper::writeVector(string filename, int n, double* b)
+	{
+		ofstream file;
+		file.open(filename);
+		file << n << "\n";
+
+		for (int i = 0; i < n; i++)
+		{
+			file << b[i] << " ";
+		}
+		file.close();
+	}
+
+	void MethodHelper::writeMatrix(string filename, int n, int m, double** A) {
+		ofstream file;
+		file.open(filename);
+		file << n << " "<< m << "\n";
+
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+				file << A[i][j] << " ";
+			file << "\n";
+		}
+		file.close();
+	}
 }

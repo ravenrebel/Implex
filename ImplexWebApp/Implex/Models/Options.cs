@@ -7,6 +7,6 @@ namespace Implex.Models
 {
     public class Options
     {
-        public int  FileId { get; set; }
+        public uint  FileId { get; set; }
     }
 }

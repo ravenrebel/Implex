@@ -11,6 +11,27 @@
       <DefineConstants>TRACE</DefineConstants>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <DefineConstants>DEBUG;TRACE</DefineConstants>
+      <DebugType>full</DebugType>
+      <DebugSymbols>true</DebugSymbols>
+      <PlatformTarget>x64</PlatformTarget>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <PlatformTarget>x64</PlatformTarget>
+      <DebugType>full</DebugType>
+      <DebugSymbols>true</DebugSymbols>
+      <DefineConstants>DEBUG;TRACE</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Remove="wwwroot\files\**" />
+      <Content Remove="wwwroot\files\**" />
+      <EmbeddedResource Remove="wwwroot\files\**" />
+      <None Remove="wwwroot\files\**" />
+    </ItemGroup>
+
 
     <ItemGroup>
         <None Update="app.db" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
@@ -28,10 +49,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\LinearAlgebraNumMethods\LinearAlgebraNumMethods.vcxproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="wwwroot\files\" />
     </ItemGroup>
 
 </Project>

@@ -15,7 +15,7 @@ namespace LinearAlgebraNumMethods {
 
 	public:
 		List<double>^ getVectorX();
-		bool Method(List<List<double>^>^ matrixA, List<double>^ vectorB, List<double>^ initialX, double eps);
-		bool Method(int fileId);
+		bool method(List<List<double>^>^ matrixA, List<double>^ vectorB, List<double>^ initialX, double eps);
+		bool method(unsigned long fileId, double eps);
 	};
 }

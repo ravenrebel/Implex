@@ -14,12 +14,20 @@
         <a type="button" class="btn btn-secondary" asp-controller="Methods" asp-action="FormJacobiMethod">Use Forms</a>
     </div>
 </div>
-<div class="my-4 mx-5">
-    <form asp-action="FileJacobiMethod" method="post" enctype="multipart/form-data">
+<div class="row my-5 mx-5">
+    <form asp-action="FileJacobiDownload" method="post" enctype="multipart/form-data">
         <div class="row text-center">
             <div class="form-group col-sm">
-                <label for="matrixA">MatrixA:</label>
-                <input type="file" id="matrixA" name="matrix" class="form-control-file border" accept="text/plain">
+                <label for="matrixA">Matrix A:</label>
+                <input type="file" id="matrixA" name="inputFiles" class="form-control-file border" accept="text/plain">
+            </div>
+            <div class="form-group col-sm">
+                <label for="vectorB">Vector B:</label>
+                <input type="file" id="vectorB" name="inputFiles" class="form-control-file border" accept="text/plain">
+            </div>
+            <div class="form-group col-sm">
+                <label for="vectorX">Vector X:</label>
+                <input type="file" id="vectorX" name="inputFiles" class="form-control-file border" accept="text/plain">
             </div>
             <div class="form-group col-sm">
                 <label for="eps">Eps:</label>
@@ -27,7 +35,7 @@
             </div>
         </div>
         <div class="row m-4">
-            <input type="submit" value="Calculate" class="btn btn-secondary" id="btn" />
+            <input type="submit" value="Calculate and view file" class="btn btn-secondary" id="btn" />
         </div>
-    </form>
+    </form> 
 </div>

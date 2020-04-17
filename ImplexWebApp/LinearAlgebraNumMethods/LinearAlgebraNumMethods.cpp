@@ -1,8 +1,6 @@
 ﻿#include "pch.h"
 #include "MethodHelper.h"
 #include "LinearAlgebraNumMethods.h"
-#include <chrono>
-#include <thread>
 #include<string>
 
 
@@ -63,7 +61,7 @@ namespace LinearAlgebraNumMethods {
 		return vectorX;
 	}
 
-	bool JacobiMethodCPlusPlus::Method(List<List<double>^>^ matrixA, List<double>^ vectorB, List<double>^ initialX, double eps) {
+	bool JacobiMethodCPlusPlus::method(List<List<double>^>^ matrixA, List<double>^ vectorB, List<double>^ initialX, double eps) {
 		int n = matrixA->Count;
 		double** A = LinearAlgebraNumMethods::MethodHelper::sharpListToMatrix(matrixA, n);
 
@@ -85,8 +83,6 @@ namespace LinearAlgebraNumMethods {
 				vectorX->Add(x[j]);
 			}
 
-			//std::this_thread::sleep_for(std::chrono::seconds(5));
-
 			for (int j = 0; j < n; j++)
 			{
 				delete[] A[j];
@@ -100,11 +96,30 @@ namespace LinearAlgebraNumMethods {
 		return false;
 	}
 
-	bool JacobiMethodCPlusPlus::Method(int fileId) {
+	bool JacobiMethodCPlusPlus::method(unsigned long fileId, double eps) {
 		int n;
-		string filename = to_string(fileId) + ".txt";
-		double** A = MethodHelper::readMatrix("\\ImplexWebApp\\Implex\\wwwroot\\files\\" + filename, n, n);
+		string fileName = to_string(fileId);
 
-		return true;
+		double** A = MethodHelper::readMatrix("wwwroot\\input_files\\" + fileName + "A" + ".txt", n, n);
+		if (checkMatrix(A, n))
+		{
+			double* b = MethodHelper::readVector("wwwroot\\input_files\\" + fileName + "b" + ".txt", n);
+			double* x = MethodHelper::readVector("wwwroot\\input_files\\" + fileName + "x" + ".txt", n);
+
+			jacobi(n, A, b, x, eps);
+
+			MethodHelper::writeVector("wwwroot\\output_files\\" + fileName + ".txt", n, x);
+
+			for (int j = 0; j < n; j++)
+			{
+				delete[] A[j];
+			}
+			delete[] A;
+			delete[] x;
+			delete[] b;
+
+			return true;
+		}
+		return false;
 	}
 }

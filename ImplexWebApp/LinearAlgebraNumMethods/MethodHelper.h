@@ -11,6 +11,9 @@ namespace LinearAlgebraNumMethods {
 	public:
 		static double** sharpListToMatrix(List<List<double>^>^ matrixA, int n);
 		static double** MethodHelper::readMatrix(string filename, int &n, int &m);
+		static double* MethodHelper::readVector(string filename, int& n);
+		static void MethodHelper::writeMatrix(string filename, int n, int m, double** A);
+		static void MethodHelper::writeVector(string filename, int n, double* b);
 	};
 }
 
