@@ -14,6 +14,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Implex.Models;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace Implex
 {
@@ -63,7 +65,15 @@ namespace Implex
             }
 
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "output_files")),
+                RequestPath = "/MyFiles"
+            });
 
             app.UseRouting();
 

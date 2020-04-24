@@ -46,8 +46,8 @@ namespace Implex.Controllers
         }
 
         [HttpPost]
-        [Route("result")]
-        public async Task<FileResult> FileJacobiDownload(JacobiMethod jacobiMethod, IFormFileCollection inputFiles)
+       // [Route("result")]
+        public async Task<IActionResult> FileJacobiDownload(JacobiMethod jacobiMethod, IFormFileCollection inputFiles)
         {
             uint id = _options.FileId;
             lock (_options) _options.FileId++;
@@ -79,7 +79,9 @@ namespace Implex.Controllers
             }
             else fileResult += "empty.txt";
 
-            return File(new FileStream(fileResult, FileMode.Open), "text/plain");
+            Stream newStream = new FileStream(fileResult, FileMode.Open);
+
+            return File(newStream, "text/plain");
         }
     }
 }
