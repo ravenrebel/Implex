@@ -11,6 +11,6 @@ namespace Implex.Models
         
         public object Result { get; set; }
 
-        public List<string> SourceCodePath { get; set; }
+        public string Implementation { get; set; }
     }
 }

@@ -1,9 +1,4 @@
 ﻿
-const sizeInput = document.getElementById("size");
-const widthInput = document.getElementById("width");
-const heightInput = document.getElementById("height");
-
-
 function generateMatrixInput(id, height, width) {
     const matrixInput = document.getElementById(id);
     matrixInput.innerHTML = "&nbsp";
@@ -18,6 +13,7 @@ function generateMatrixInput(id, height, width) {
             col.className = "col my-1";
             const inputElement = document.createElement("input");
             inputElement.type = "text";
+            inputElement.required = true;
             inputElement.className = "form-control";
             inputElement.name = id + "[" + index + "]";
             col.appendChild(inputElement);
@@ -32,8 +28,23 @@ function generateSystemInput(matrixInputId, vectorInputId, size) {
     generateMatrixInput(matrixInputId, size, size);
 }
 
-function generateJacobiSystemInput(matrixInputId, vectorInputId, initialValuesId) {
+function generateJacobiSystemInput(matrixInputId, vectorInputId, initialValuesId, sizeId) {
+    const sizeInput = document.getElementById(sizeId);
+
     let size = sizeInput.value;
     generateSystemInput(matrixInputId, vectorInputId, size);
     generateMatrixInput(initialValuesId, 1, size);
+}
+
+function generateMatrixMultiplicationInput(matrixAInputId, matrixBInputId, nSizeId, mSizeId, pSizeId) {
+    const nSizeInput = document.getElementById(nSizeId);
+    const mSizeInput = document.getElementById(mSizeId);
+    const pSizeInput = document.getElementById(pSizeId);
+
+    let nSize = nSizeInput.value;
+    let mSize = mSizeInput.value;
+    let pSize = pSizeInput.value;
+
+    generateMatrixInput(matrixAInputId, nSize, mSize);
+    generateMatrixInput(matrixBInputId, mSize, pSize);
 }

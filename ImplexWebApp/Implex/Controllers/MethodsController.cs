@@ -14,23 +14,31 @@ namespace Implex.Controllers
     {
         private IHostingEnvironment _hostingEnvironment;
         private readonly Options _options;
+        private JacobiMethod _jacobiMethodCPP;
+        private MatrixMultiplication _multiplicationASM;
 
         public MethodsController(IHostingEnvironment environment, Options options)
         {
             _hostingEnvironment = environment;
             _options = options;
+
+            _jacobiMethodCPP = new JacobiMethod();
+            _jacobiMethodCPP.Implementation = "C++ is a high-level, general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language.";
+
+            _multiplicationASM = new MatrixMultiplication();
+            _multiplicationASM.Implementation = "In computer programming, assembly language(or assembler language), often abbreviated asm, is any low - level programming language in which there is a very strong correspondence between the instructions in the language and the architecture's machine code instructions.";
         }
 
         [HttpGet]
         public IActionResult FormJacobiMethod()
         {
-            return View(new JacobiMethod());
+            return View(_jacobiMethodCPP);
         }
 
         [HttpGet]
         public IActionResult FileJacobiMethod()
         {
-            return View(new JacobiMethod());
+            return View(_jacobiMethodCPP);
         }
 
         [HttpPost]
@@ -38,15 +46,15 @@ namespace Implex.Controllers
         {
             if (jacobiMethod.VectorB != null && jacobiMethod.MatrixA != null && jacobiMethod.VectorX != null)
             {
-                JacobiMethodCPlusPlus jacobiMethodCPlusPlus = new JacobiMethodCPlusPlus();
-                if (jacobiMethodCPlusPlus.method(jacobiMethod.MatrixA, jacobiMethod.VectorB, jacobiMethod.VectorX, jacobiMethod.Eps))
-                    jacobiMethod.Result = jacobiMethodCPlusPlus.getVectorX();
+                JacobiMethodCPlusPlus jacobiMethodCPP = new JacobiMethodCPlusPlus();
+
+                if (jacobiMethodCPP.method(jacobiMethod.MatrixA, jacobiMethod.VectorB, jacobiMethod.VectorX, jacobiMethod.Eps))
+                    jacobiMethod.Result = jacobiMethodCPP.getVectorX();
             }
-            return View(jacobiMethod);
+            return View(_jacobiMethodCPP);
         }
 
         [HttpPost]
-       // [Route("result")]
         public async Task<IActionResult> FileJacobiDownload(JacobiMethod jacobiMethod, IFormFileCollection inputFiles)
         {
             uint id = _options.FileId;
@@ -82,6 +90,18 @@ namespace Implex.Controllers
             Stream newStream = new FileStream(fileResult, FileMode.Open);
 
             return File(newStream, "text/plain");
+        }
+
+        [HttpGet]
+        public IActionResult FormMatrixMultiplicationAssembly()
+        {
+            return View(_multiplicationASM);
+        }
+
+        [HttpPost]
+        public IActionResult FormMatrixMultiplicationAssembly(MatrixMultiplication matrixMultiplication)
+        {
+            return View(_multiplicationASM);
         }
     }
 }
