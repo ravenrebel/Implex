@@ -3,7 +3,10 @@
 #include <fstream>
 
 namespace LinearAlgebraNumMethods {
-	double** MethodHelper::sharpListToMatrix(List<List<double>^>^ matrixA, int n) {
+	double** MethodHelper::sharpListToMatrix(List<List<double>^>^ matrixA) {
+
+		int n = matrixA[0]->Count;
+
 		double** newA = new double* [n];
 		int i = 0;
 		for each (List<double>^ row in matrixA)
@@ -16,6 +19,21 @@ namespace LinearAlgebraNumMethods {
 			i++;
 		}
 		return newA;
+	}
+
+	List<List<double>^>^ MethodHelper::matrixToList(double** matrix, int n, int m)
+	{
+		List<List<double>^>^ list = gcnew List<List<double>^>();
+
+		for (int i = 0; i < n; i++)
+		{
+			List<double>^ row = gcnew List<double>();
+			for (int j = 0; j < m; j++)
+				row->Add(matrix[i][j]);
+			list->Add(row);
+		}
+
+		return list;
 	}
 
 	double** MethodHelper::readMatrix(string filename, int &n, int &m) {

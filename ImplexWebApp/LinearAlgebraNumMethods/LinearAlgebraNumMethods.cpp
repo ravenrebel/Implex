@@ -63,7 +63,7 @@ namespace LinearAlgebraNumMethods {
 
 	bool JacobiMethodCPlusPlus::method(List<List<double>^>^ matrixA, List<double>^ vectorB, List<double>^ initialX, double eps) {
 		int n = matrixA->Count;
-		double** A = LinearAlgebraNumMethods::MethodHelper::sharpListToMatrix(matrixA, n);
+		double** A = LinearAlgebraNumMethods::MethodHelper::sharpListToMatrix(matrixA);
 
 		if (checkMatrix(A, n))
 		{

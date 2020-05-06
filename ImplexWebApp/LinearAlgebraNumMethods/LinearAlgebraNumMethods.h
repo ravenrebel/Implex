@@ -7,6 +7,7 @@ using namespace Collections::Generic;
 using namespace std;
 
 namespace LinearAlgebraNumMethods {
+
 	public ref class JacobiMethodCPlusPlus {
 	private:
 		List<double>^ vectorX = gcnew List<double>();

@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
-using System.Threading;
 
 namespace Implex.Controllers
 {
@@ -49,7 +48,7 @@ namespace Implex.Controllers
                 JacobiMethodCPlusPlus jacobiMethodCPP = new JacobiMethodCPlusPlus();
 
                 if (jacobiMethodCPP.method(jacobiMethod.MatrixA, jacobiMethod.VectorB, jacobiMethod.VectorX, jacobiMethod.Eps))
-                    jacobiMethod.Result = jacobiMethodCPP.getVectorX();
+                    _jacobiMethodCPP.Result = jacobiMethodCPP.getVectorX();
             }
             return View(_jacobiMethodCPP);
         }
@@ -101,6 +100,11 @@ namespace Implex.Controllers
         [HttpPost]
         public IActionResult FormMatrixMultiplicationAssembly(MatrixMultiplication matrixMultiplication)
         {
+            if (matrixMultiplication.MatrixA != null && matrixMultiplication.MatrixB != null)
+            {
+                MatrixMultiplicationASM multiplicationASM = new MatrixMultiplicationASM();
+                _multiplicationASM.Result = multiplicationASM.multiplyASM(matrixMultiplication.MatrixA, matrixMultiplication.MatrixB);
+            }
             return View(_multiplicationASM);
         }
     }

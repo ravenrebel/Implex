@@ -4,10 +4,12 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UserSecretsId>aspnet-Implex-6CF51243-A952-484D-ADA4-E97D855B69E5</UserSecretsId>
         <Configurations>Debug;Release;LinuxRelease;LinuxDebug</Configurations>
+        <OutputType>Exe</OutputType>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LinuxDebug|AnyCPU'">
-      <PlatformTarget>x64</PlatformTarget>
+      <PlatformTarget>x86</PlatformTarget>
       <DefineConstants>TRACE</DefineConstants>
     </PropertyGroup>
 
@@ -15,11 +17,11 @@
       <DefineConstants>DEBUG;TRACE</DefineConstants>
       <DebugType>full</DebugType>
       <DebugSymbols>true</DebugSymbols>
-      <PlatformTarget>x64</PlatformTarget>
+      <PlatformTarget>x86</PlatformTarget>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-      <PlatformTarget>x64</PlatformTarget>
+      <PlatformTarget>x86</PlatformTarget>
       <DebugType>full</DebugType>
       <DebugSymbols>true</DebugSymbols>
       <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -53,5 +55,23 @@
     <ItemGroup>
       <ProjectReference Include="..\LinearAlgebraNumMethods\LinearAlgebraNumMethods.vcxproj" />
     </ItemGroup>
+
+   
+
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+      <TypeScriptTarget>ES5</TypeScriptTarget>
+      <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+      <TypeScriptModuleKind>None</TypeScriptModuleKind>
+      <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+      <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+      <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+      <TypeScriptOutFile />
+      <TypeScriptOutDir />
+      <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+      <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+      <TypeScriptSourceMap>True</TypeScriptSourceMap>
+      <TypeScriptMapRoot />
+      <TypeScriptSourceRoot />
+    </PropertyGroup>
   
 </Project>
