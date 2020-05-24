@@ -3,14 +3,33 @@
 
 
 <div class="jumbotron">
-    <h4>Result</h4>
+    <h4>Result:</h4>
     <div class="row text-center">
         @{
             if (Model.Result != null)
             {
-                foreach (var elem in (IEnumerable)Model.Result)
+                if (Model.Result.GetType() == typeof(string))
                 {
-                    @:<div class="col-sm"><p>@elem</p></div>
+                    @:<div class="col-sm"><p>@Model.Result</p></div>
+                }
+                else
+                {
+                    if (Model.Result.GetType() == typeof(List<List<double>>))
+                    {
+                        foreach (var row in (IEnumerable)Model.Result)
+                        {
+                            @:<div class="row">
+                            foreach (var elem in (IEnumerable)row)
+                            {
+                                @:<div class="col"><p>@elem</p></div>
+                            }
+                            @:</div>
+                        }
+                    }
+                    else foreach (var elem in (IEnumerable)Model.Result)
+                        {
+                            @:<div class="col-sm"><p>@elem</p></div>
+                        }
                 }
             }
         }

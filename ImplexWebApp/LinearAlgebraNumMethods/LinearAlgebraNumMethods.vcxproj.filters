@@ -27,10 +27,10 @@
     <ClInclude Include="MethodHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="MatrixMultiplication.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MatrixMultiplicationASM.h">
+    <ClInclude Include="ParallelNativeMatrixMult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClCompile Include="MethodHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MatrixMultiplicationASM.cpp">
+    <ClCompile Include="MatrixMultiplication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

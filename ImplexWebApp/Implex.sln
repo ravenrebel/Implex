@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Implex", "Implex\Implex.csp
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearAlgebraNumMethods", "LinearAlgebraNumMethods\LinearAlgebraNumMethods.vcxproj", "{59A2FE7F-9797-454E-913C-D9D10FC22684}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinearAlgebra", "LinearAlgebra\LinearAlgebra.csproj", "{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,8 +61,8 @@ Global
 		{48E9BBC0-0095-4474-9314-680D0C110F12}.Release|x64.Build.0 = Release|Any CPU
 		{48E9BBC0-0095-4474-9314-680D0C110F12}.Release|x86.ActiveCfg = Release|Any CPU
 		{48E9BBC0-0095-4474-9314-680D0C110F12}.Release|x86.Build.0 = Release|Any CPU
-		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Debug|Any CPU.Build.0 = Debug|Win32
+		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Debug|Any CPU.Build.0 = Debug|x64
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Debug|ARM.ActiveCfg = Debug|ARM
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Debug|ARM.Build.0 = Debug|ARM
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Debug|x64.ActiveCfg = Debug|x64
@@ -81,13 +83,46 @@ Global
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.LinuxRelease|x64.Build.0 = LinuxRelease|x64
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.LinuxRelease|x86.ActiveCfg = LinuxRelease|Win32
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.LinuxRelease|x86.Build.0 = LinuxRelease|Win32
-		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|Any CPU.ActiveCfg = Release|Win32
+		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|Any CPU.ActiveCfg = Release|x64
+		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|Any CPU.Build.0 = Release|x64
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|ARM.ActiveCfg = Release|ARM
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|ARM.Build.0 = Release|ARM
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|x64.ActiveCfg = Release|x64
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|x64.Build.0 = Release|x64
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|x86.ActiveCfg = Release|Win32
 		{59A2FE7F-9797-454E-913C-D9D10FC22684}.Release|x86.Build.0 = Release|Win32
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Debug|x64.Build.0 = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Debug|x86.Build.0 = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxDebug|Any CPU.Build.0 = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxDebug|ARM.ActiveCfg = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxDebug|ARM.Build.0 = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxDebug|x64.ActiveCfg = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxDebug|x64.Build.0 = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxDebug|x86.ActiveCfg = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxDebug|x86.Build.0 = Debug|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxRelease|Any CPU.Build.0 = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxRelease|ARM.ActiveCfg = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxRelease|ARM.Build.0 = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxRelease|x64.ActiveCfg = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxRelease|x64.Build.0 = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxRelease|x86.ActiveCfg = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.LinuxRelease|x86.Build.0 = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Release|ARM.Build.0 = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Release|x64.ActiveCfg = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Release|x64.Build.0 = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{77B63D51-A2C2-47C1-A788-F88E60B4F8C3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

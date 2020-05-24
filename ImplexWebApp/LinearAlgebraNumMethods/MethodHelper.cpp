@@ -21,6 +21,23 @@ namespace LinearAlgebraNumMethods {
 		return newA;
 	}
 
+	double* MethodHelper::sharpListToVector(List<List<double>^>^ matrixA) {
+
+		int n = matrixA[0]->Count;
+
+		double* newA = new double[n];
+		int i = 0;
+		for each (List<double> ^ row in matrixA)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				newA[j + i * n] = row[j];
+			}
+			i++;
+		}
+		return newA;
+	}
+
 	List<List<double>^>^ MethodHelper::matrixToList(double** matrix, int n, int m)
 	{
 		List<List<double>^>^ list = gcnew List<List<double>^>();
@@ -30,6 +47,21 @@ namespace LinearAlgebraNumMethods {
 			List<double>^ row = gcnew List<double>();
 			for (int j = 0; j < m; j++)
 				row->Add(matrix[i][j]);
+			list->Add(row);
+		}
+
+		return list;
+	}
+
+	List<List<double>^>^ MethodHelper::vectorToList(double* matrix, int n, int m)
+	{
+		List<List<double>^>^ list = gcnew List<List<double>^>();
+
+		for (int i = 0; i < n; i++)
+		{
+			List<double>^ row = gcnew List<double>();
+			for (int j = 0; j < m; j++)
+				row->Add(matrix[j + i * n]);
 			list->Add(row);
 		}
 
@@ -68,6 +100,23 @@ namespace LinearAlgebraNumMethods {
 		return b;
 	}
 
+	double* MethodHelper::readVector(string filename, int& n, int& m)
+	{
+		ifstream file;
+		file.open(filename);
+		file >> n >> m;
+
+		double* A = new double [n*m];
+
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+				file >> A[j + i * m];
+		}
+		file.close();
+		return A;
+	}
+
 	void MethodHelper::writeVector(string filename, int n, double* b)
 	{
 		ofstream file;
@@ -90,6 +139,21 @@ namespace LinearAlgebraNumMethods {
 		{
 			for (int j = 0; j < m; j++)
 				file << A[i][j] << " ";
+			file << "\n";
+		}
+		file.close();
+	}
+
+	void MethodHelper::writeMatrix(string filename, int n, int m, double* A)
+	{
+		ofstream file;
+		file.open(filename);
+		file << n << " " << m << "\n";
+
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++)
+				file << A[j + i * m] << " ";
 			file << "\n";
 		}
 		file.close();

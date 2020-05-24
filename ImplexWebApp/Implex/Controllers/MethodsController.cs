@@ -14,7 +14,7 @@ namespace Implex.Controllers
         private IHostingEnvironment _hostingEnvironment;
         private readonly Options _options;
         private JacobiMethod _jacobiMethodCPP;
-        private MatrixMultiplication _multiplicationASM;
+        private Models.MatrixMultiplication _multiplicationCPP;
 
         public MethodsController(IHostingEnvironment environment, Options options)
         {
@@ -24,8 +24,8 @@ namespace Implex.Controllers
             _jacobiMethodCPP = new JacobiMethod();
             _jacobiMethodCPP.Implementation = "C++ is a high-level, general-purpose programming language created by Bjarne Stroustrup as an extension of the C programming language.";
 
-            _multiplicationASM = new MatrixMultiplication();
-            _multiplicationASM.Implementation = "In computer programming, assembly language(or assembler language), often abbreviated asm, is any low - level programming language in which there is a very strong correspondence between the instructions in the language and the architecture's machine code instructions.";
+            _multiplicationCPP = new Models.MatrixMultiplication();
+            _multiplicationCPP.Implementation = "This method was written on C++ which is a high - level, general - purpose programming language. The first optimization is to re-order the loops to enforce local access in all of the matrices. The standard mapping was then used from a two-dimensional array onto a one-dimensional space. This makes explicit the fact that subscripting in a two-dimensional array requires integer multiplication as well as addition. Replacing subscripting with explicit pointer access allows the elimination of these multiplications.";
         }
 
         [HttpGet]
@@ -49,6 +49,7 @@ namespace Implex.Controllers
 
                 if (jacobiMethodCPP.method(jacobiMethod.MatrixA, jacobiMethod.VectorB, jacobiMethod.VectorX, jacobiMethod.Eps))
                     _jacobiMethodCPP.Result = jacobiMethodCPP.getVectorX();
+                    else _jacobiMethodCPP.Result = "It is not strictly diagonally dominant system of linear equations.";
             }
             return View(_jacobiMethodCPP);
         }
@@ -63,12 +64,12 @@ namespace Implex.Controllers
             int i = 0;
 
             string fileResult = _hostingEnvironment.WebRootPath + "\\output_files\\";
+            string files = Path.Combine(_hostingEnvironment.WebRootPath, "input_files");
 
             foreach (var file in inputFiles)
             {
                 if (file != null)
                 {
-                    string files = Path.Combine(_hostingEnvironment.WebRootPath, "input_files");
                     string filePath = Path.Combine(files, id.ToString() + markers[i] + ".txt");
 
                     await using FileStream stream = System.IO.File.Create(filePath);
@@ -92,20 +93,64 @@ namespace Implex.Controllers
         }
 
         [HttpGet]
-        public IActionResult FormMatrixMultiplicationAssembly()
+        public IActionResult FormMatrixMultiplication()
         {
-            return View(_multiplicationASM);
+            return View(_multiplicationCPP);
         }
 
         [HttpPost]
-        public IActionResult FormMatrixMultiplicationAssembly(MatrixMultiplication matrixMultiplication)
+        public IActionResult FormMatrixMultiplication(Models.MatrixMultiplication matrixMultiplication)
         {
             if (matrixMultiplication.MatrixA != null && matrixMultiplication.MatrixB != null)
             {
-                MatrixMultiplicationASM multiplicationASM = new MatrixMultiplicationASM();
-                _multiplicationASM.Result = multiplicationASM.multiplyASM(matrixMultiplication.MatrixA, matrixMultiplication.MatrixB);
+                LinearAlgebraNumMethods.MatrixMultiplication multiplication = new LinearAlgebraNumMethods.MatrixMultiplication();
+                _multiplicationCPP.Result = multiplication.multiply(matrixMultiplication.MatrixA, matrixMultiplication.MatrixB);
             }
-            return View(_multiplicationASM);
+            return View(_multiplicationCPP);
+        }
+
+        [HttpGet]
+        public IActionResult FileMatrixMultiplication()
+        {
+            return View(_multiplicationCPP);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FileMatrixMultiplicationDownload(Models.MatrixMultiplication matrixMultiplication, IFormFileCollection inputFiles)
+        {
+            uint id = _options.FileId;
+            lock (_options) _options.FileId++;
+
+            List<string> markers = new List<string> { "A", "B"};
+            int i = 0;
+
+            string fileResult = _hostingEnvironment.WebRootPath + "\\output_files\\";
+            string files = Path.Combine(_hostingEnvironment.WebRootPath, "input_files");
+
+            foreach (var file in inputFiles) // refactor pls
+            {
+                if (file != null)
+                {
+                    string filePath = Path.Combine(files, id.ToString() + markers[i] + ".txt");
+
+                    await using FileStream stream = System.IO.File.Create(filePath);
+                    await file.CopyToAsync(stream);
+                    stream.Close();
+                }
+
+                i++;
+            }
+
+            LinearAlgebraNumMethods.MatrixMultiplication multiplication = new LinearAlgebraNumMethods.MatrixMultiplication();
+            if (multiplication.multiply(id))
+            {
+                fileResult += id.ToString() + ".txt";
+            }
+            else fileResult += "empty.txt";
+
+            Stream newStream = new FileStream(fileResult, FileMode.Open);
+
+            return File(newStream, "text/plain");
         }
     }
 }

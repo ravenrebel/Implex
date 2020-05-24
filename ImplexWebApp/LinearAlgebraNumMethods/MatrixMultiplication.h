@@ -1,18 +1,19 @@
 #pragma once
+#pragma once
 #include<iostream>
 
 using namespace System;
 using namespace System::Runtime::CompilerServices;
 using namespace Collections::Generic;
 using namespace std;
+typedef double TYPE;
 
 
 namespace LinearAlgebraNumMethods {
-	public ref class MatrixMultiplicationASM
+	public ref class MatrixMultiplication
 	{
 	public:
-		List<List<double>^>^ multiplyASM(List<List<double>^>^ matrixA, List<List<double>^>^ matrixB);
-	private:
-		//void ASM(double** a, double** b, double** res, int n, int p, int m);
+		List<List<TYPE>^>^ multiply(List<List<TYPE>^>^ matrixA, List<List<TYPE>^>^ matrixB);
+		bool multiply(unsigned long fileId);
 	};
 }
