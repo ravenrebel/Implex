@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using System;
 
 namespace Implex.Controllers
 {
@@ -45,11 +46,15 @@ namespace Implex.Controllers
         {
             if (jacobiMethod.VectorB != null && jacobiMethod.MatrixA != null && jacobiMethod.VectorX != null)
             {
-                JacobiMethodCPlusPlus jacobiMethodCPP = new JacobiMethodCPlusPlus();
+                try
+                {
+                    JacobiMethodCPlusPlus jacobiMethodCPP = new JacobiMethodCPlusPlus();
 
-                if (jacobiMethodCPP.method(jacobiMethod.MatrixA, jacobiMethod.VectorB, jacobiMethod.VectorX, jacobiMethod.Eps))
-                    _jacobiMethodCPP.Result = jacobiMethodCPP.getVectorX();
+                    if (jacobiMethodCPP.method(jacobiMethod.MatrixA, jacobiMethod.VectorB, jacobiMethod.VectorX, jacobiMethod.Eps))
+                        _jacobiMethodCPP.Result = jacobiMethodCPP.getVectorX();
                     else _jacobiMethodCPP.Result = "It is not strictly diagonally dominant system of linear equations.";
+                }
+                catch (Exception) { }
             }
             return View(_jacobiMethodCPP);
         }
@@ -80,12 +85,16 @@ namespace Implex.Controllers
                 i++;
             }
 
-            JacobiMethodCPlusPlus jacobiMethodCPlusPlus = new JacobiMethodCPlusPlus();
-            if (jacobiMethodCPlusPlus.method(id, jacobiMethod.Eps))
+            try
             {
-                fileResult += id.ToString() + ".txt";
+                JacobiMethodCPlusPlus jacobiMethodCPlusPlus = new JacobiMethodCPlusPlus();
+                if (jacobiMethodCPlusPlus.method(id, jacobiMethod.Eps))
+                {
+                    fileResult += id.ToString() + ".txt";
+                }
+                else fileResult += "empty.txt";
             }
-            else fileResult += "empty.txt";
+            catch (Exception) { }
 
             Stream newStream = new FileStream(fileResult, FileMode.Open);
 
@@ -103,8 +112,12 @@ namespace Implex.Controllers
         {
             if (matrixMultiplication.MatrixA != null && matrixMultiplication.MatrixB != null)
             {
-                LinearAlgebraNumMethods.MatrixMultiplication multiplication = new LinearAlgebraNumMethods.MatrixMultiplication();
-                _multiplicationCPP.Result = multiplication.multiply(matrixMultiplication.MatrixA, matrixMultiplication.MatrixB);
+                try
+                {
+                    LinearAlgebraNumMethods.MatrixMultiplication multiplication = new LinearAlgebraNumMethods.MatrixMultiplication();
+                    _multiplicationCPP.Result = multiplication.multiply(matrixMultiplication.MatrixA, matrixMultiplication.MatrixB);
+                }
+                catch (Exception) { }
             }
             return View(_multiplicationCPP);
         }
@@ -141,12 +154,16 @@ namespace Implex.Controllers
                 i++;
             }
 
-            LinearAlgebraNumMethods.MatrixMultiplication multiplication = new LinearAlgebraNumMethods.MatrixMultiplication();
-            if (multiplication.multiply(id))
+            try
             {
-                fileResult += id.ToString() + ".txt";
+                LinearAlgebraNumMethods.MatrixMultiplication multiplication = new LinearAlgebraNumMethods.MatrixMultiplication();
+                if (multiplication.multiply(id))
+                {
+                    fileResult += id.ToString() + ".txt";
+                }
+                else fileResult += "empty.txt";
             }
-            else fileResult += "empty.txt";
+            catch(Exception) { }
 
             Stream newStream = new FileStream(fileResult, FileMode.Open);
 
