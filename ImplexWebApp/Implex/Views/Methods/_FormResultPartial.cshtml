@@ -1,13 +1,15 @@
 ﻿@using System.Collections
 @model Method
-
+@{
+    int i = 1;
+}
 
     <div class="jumbotron">
         <h4>Result:</h4>
         @{
             if (Model.Result != null)
             {
-                if (Model.Result.GetType() == typeof(string))
+                if (Model.Result is string)
                 {
                     @:  <div class="row text-center">
                         @:<div class="col-sm"><p>@Model.Result</p></div>
@@ -19,21 +21,25 @@
                     {
                         foreach (var row in (IEnumerable)Model.Result)
                         {
-                            @:<div class="row text-justify">
-                                foreach (var elem in (IEnumerable)row)
-                                {
-                                    @:<div class="col"><p>@elem</p></div>
-                                }
+                            @:<div class="row text-center">
+                            foreach (var elem in (IEnumerable)row)
+                            {
+                                @:<div class="col-@i"><p>@elem</p></div>
+                                i++;
+                            }
                             @:</div>
+                            i = 1;
                         }
                     }
-                    else foreach (var elem in (IEnumerable)Model.Result)
-                        {
-                            @:  <div class="row text-center">
-                                @:<div class="col-sm"><p>@elem</p></div>
-                            @:</div>
-                        }
+                    else 
+                    {foreach (var elem in (IEnumerable)Model.Result)
+                    {
+                        @:<div class="row text-center">
+                        @:<div class="col-sm"><p>@elem</p></div>
+                        @:</div>
+                    }}
                 }
             }
         }
     </div>
+        
