@@ -32,9 +32,9 @@ namespace LinearAlgebraNumMethods {
 
 		List<List<TYPE>^>^ matrixResult = MethodHelper::vectorToList(res, N, M);
 
-		/*delete A;
-		delete B;
-		delete res;*/
+		delete[] A;
+		delete[] B;
+		delete[] res;
 
 		return matrixResult;
 	}
@@ -44,8 +44,8 @@ namespace LinearAlgebraNumMethods {
 		int N, M, K;
 		string fileName = to_string(fileId);
 
-		double* A = MethodHelper::readVector("wwwroot\\input_files\\" + fileName + "A" + ".txt", N, K);
-		double* B = MethodHelper::readVector("wwwroot\\input_files\\" + fileName + "B" + ".txt", K, M);
+		TYPE* A = MethodHelper::readVector("wwwroot\\input_files\\" + fileName + "A" + ".txt", N, K);
+		TYPE* B = MethodHelper::readVector("wwwroot\\input_files\\" + fileName + "B" + ".txt", K, M);
 		int res_size = N * M;
 		TYPE* res = new double[res_size];
 		for (size_t i = 0; i < res_size; i++)

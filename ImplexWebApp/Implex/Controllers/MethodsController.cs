@@ -140,7 +140,7 @@ namespace Implex.Controllers
             string fileResult = _hostingEnvironment.WebRootPath + "\\output_files\\";
             string files = Path.Combine(_hostingEnvironment.WebRootPath, "input_files");
 
-            foreach (var file in inputFiles) // refactor pls
+            foreach (var file in inputFiles)
             {
                 if (file != null)
                 {
